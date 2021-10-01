@@ -40,8 +40,12 @@ if __name__ == '__main__':
 
     sem = threading.Semaphore(parsed_args.thread_num)
     threads_list = []
-    for index in tqdm.trange(len(files)):
+    index = 0
+    pbar = tqdm.tqdm(total=len(files))
+    while index < len(files):
+        pbar.update(1)
         file = files[index]
+        index += 1
         if os.path.exists(file) == True:
            print('{0} already download!'.format(file))
            continue
@@ -50,6 +54,11 @@ if __name__ == '__main__':
         sem.acquire()
         th.start()
         threads_list.append(th)
+
+        if len(files)!= pbar.total:
+            pbar.total = len(files)
+            pbar.refresh()
+
 
 
 
