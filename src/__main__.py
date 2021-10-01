@@ -1,7 +1,7 @@
 __author__ = 'dk'
 import argparse
 from parser_git_dir import *
-import download
+from import download
 import tqdm
 import os
 import threading

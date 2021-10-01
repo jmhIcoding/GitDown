@@ -4,7 +4,7 @@ import sys
 import requests
 import base64
 import json
-from src.config import  github_access_token
+from config import  github_access_token
 def download_file(repo, path, dst):
     print('Download {0} now!'.format(path))
     sys.stdout.flush()

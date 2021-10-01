@@ -5,8 +5,8 @@ from urllib.parse import urlparse
 from  github import Github
 import tqdm
 import os
-from src.config import github_access_token
-from src import  download
+from config import github_access_token
+import download
 
 
 def parser_git_directory(_repo, directory):
