@@ -17,7 +17,7 @@ def parser_git_directory(_repo, directory):
     dirs= repo.get_dir_contents( '/' + directory)
     filepaths = []
     for file_or_dir in dirs:
-
+            print('Go deep into {0}'.format(directory))
             if file_or_dir.type == 'dir':
                 ##说明是文件夹, 递归访问
                 sub_url =  directory + '/' + file_or_dir.path.split('/')[-1]
