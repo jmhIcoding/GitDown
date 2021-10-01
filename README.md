@@ -4,10 +4,14 @@
 本人写了一个支持Github特定文件夹内容下载的项目：GitDown.
 github地址为：https://github.com/jmhIcoding/GitDown
 
+目前已经公开的类似项目，经常会出现下载文件丢失的问题，我这个项目会自动检测丢失，对于未成功下载的文件会反复尝试下载。
+
 # 使用方法
 ## 安装
 
 ```bash
+pip3 install pygithub requests
+
 git clone https://github.com/jmhIcoding/GitDown.git
 ```
 
