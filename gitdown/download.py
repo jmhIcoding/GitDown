@@ -4,10 +4,11 @@ import sys
 import requests
 import base64
 import json
-from config import  github_access_token
+from gitdown.config import  github_access_token
 def download_file(repo, path, dst):
     print('Download {0} now!'.format(path))
     sys.stdout.flush()
+
     if os.path.exists(os.path.dirname(dst)) == False:
         os.makedirs(os.path.dirname(dst), True)
 

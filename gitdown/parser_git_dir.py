@@ -1,13 +1,6 @@
 __author__ = 'dk'
-
-from urllib.parse import urlparse
-
 from  github import Github
-import tqdm
-import os
-from config import github_access_token
-import download
-
+from gitdown.config import github_access_token
 
 def parser_git_directory(_repo, directory):
     git = Github(login_or_token=github_access_token)

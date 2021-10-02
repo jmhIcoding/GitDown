@@ -1,18 +1,21 @@
 __author__ = 'dk'
 import argparse
-from parser_git_dir import *
-from import download
+from gitdown.parser_git_dir import *
+from gitdown import download
 import tqdm
 import os
 import threading
 
+
 lock = threading.Semaphore(1)
 files = []
 sem = None
-def down(repo, file):
-    global  sem, lock, files
+dst_root = os.path.expanduser('~')
 
-    download.download_file(repo= repo, path= file, dst=file)
+def down(repo, file):
+    global  sem, lock, files, dst_root
+
+    download.download_file(repo= repo, path= file, dst= dst_root + '/' + file)
     if os.path.exists(file) == False:
         print('{0} download fail! it will be re-download in the future!'.format(file))
         lock.acquire()
@@ -21,11 +24,14 @@ def down(repo, file):
 
     sem.release()
 
-if __name__ == '__main__':
+
+def main():
+    global  lock, files, sem, dst_root
 
     args = argparse.ArgumentParser(description='Download github resposity directory.')
     args.add_argument('--repo', type= str, required= True, help='Something like https://github.com/jmhIcoding/social_webpage')
     args.add_argument('--directory', type=str, required= True, help='Something like pcaps/. Note that do not start with "/" and end with "/", use "" (empty) for root directory.')
+    args.add_argument('--dst_root', type=str, required=True, help= 'Indicate where do you want to store the downloaded files and sub-dirs from github.')
     args.add_argument('--thread_num', type=int, default= 5, help='The thread number for download!')
     parsed_args = args.parse_args()
 
@@ -35,13 +41,18 @@ if __name__ == '__main__':
     if parsed_args.thread_num < 1:
         raise  ValueError('Oh, thread number should >= 1 ! ')
 
+    dst_root = parsed_args.dst_root
     repo = '/'.join(parsed_args.repo.split('/')[-2:])
     files = parser_git_directory(_repo= repo, directory= parsed_args.directory)
 
     sem = threading.Semaphore(parsed_args.thread_num)
     threads_list = []
-    for index in tqdm.trange(len(files)):
+    index = 0
+    pbar = tqdm.tqdm(total=len(files))
+    while index < len(files):
+        pbar.update(1)
         file = files[index]
+        index += 1
         if os.path.exists(file) == True:
            print('{0} already download!'.format(file))
            continue
@@ -51,6 +62,12 @@ if __name__ == '__main__':
         th.start()
         threads_list.append(th)
 
+        if len(files)!= pbar.total:
+            pbar.total = len(files)
+            pbar.refresh()
+
+if __name__ == '__main__':
+    main()
 
 
 
