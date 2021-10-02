@@ -10,7 +10,7 @@ def download_file(repo, path, dst):
     sys.stdout.flush()
 
     if os.path.exists(os.path.dirname(dst)) == False:
-        os.makedirs(os.path.dirname(dst), True)
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
 
     url='https://api.github.com/repos/{0}/contents/{1}'.format(repo, path)
     headers = {
