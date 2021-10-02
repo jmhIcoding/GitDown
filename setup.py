@@ -1,11 +1,18 @@
+#coding:utf8
 import setuptools
-__author__ = 'jmh081701'
+import os
+long_description=\
+'''
+A tool to download sub-dirs from github.
 
+For more details, please refer to the homepage: https://github.com/jmhIcoding/GitDown.
+'''
 setuptools.setup(
     name='gitdown',
-    version='1.1.8',
+    version='1.1.9',
     description='A tool to download sub-dirs from github.',
-
+    long_description= long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/jmhIcoding/GitDown',
     author='jiangminghao',
     author_email='jiangminghao@iie.ac.cn',
