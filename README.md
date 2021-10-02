@@ -43,7 +43,7 @@ optional arguments:
 - dst_root: 给出要将下载好的内容放置在何处
 - thread_num: 多线程下载的线程数，默认为 5
 
-首次运行需要提供自己的github access token， 因为项目运行需要能够访问你自己的github项目，因此需要此token，获取方式见：https://blog.csdn.net/jmh1996/article/details/109327334
+**首次运行需要提供自己的github access token**， 因为项目运行需要能够访问你自己的github项目，因此需要此token，获取方式见：https://blog.csdn.net/jmh1996/article/details/109327334
 
 ```python
 Please input your github access token now, first time:1234
