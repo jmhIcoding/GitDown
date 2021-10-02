@@ -18,8 +18,9 @@ def download_file(repo, path, dst):
         'Authorization':'token {0}'.format(github_access_token)
     }
     get = requests.get(url, headers = headers)
+    content = base64.b64decode(get.json()['content']).decode()
     with open(dst,'w') as fp:
-        fp.write(base64.b64decode(get.json()['content']).decode())
+        fp.write(content)
     return  get.status_code
 
 if __name__ == '__main__':
