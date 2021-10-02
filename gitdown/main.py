@@ -35,7 +35,7 @@ def main():
     args.add_argument('--thread_num', type=int, default= 5, help='The thread number for download!')
     parsed_args = args.parse_args()
 
-    if parsed_args.directory[0] == '/' or parsed_args.directory[-1]== '/' :
+    if parsed_args.directory != '' and (parsed_args.directory[0] == '/' or parsed_args.directory[-1]== '/') :
         raise  ValueError('Oh, directory parameter must not start with "/" and end with "/"!, please refer to the help information.')
 
     if parsed_args.thread_num < 1:

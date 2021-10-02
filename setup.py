@@ -3,7 +3,7 @@ __author__ = 'jmh081701'
 
 setuptools.setup(
     name='gitdown',
-    version='1.1.2',
+    version='1.1.3',
     description='A tool to download sub-dirs from github.',
 
     url='https://github.com/jmhIcoding/GitDown',
