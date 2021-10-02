@@ -11,18 +11,14 @@
 ## 安装
 
 ```bash
-pip3 install pygithub requests
-
-git clone https://github.com/jmhIcoding/GitDown.git
+pip3 install gitdown
 ```
 
 ## 使用
 
 ```bash
-cd src					#切换到代码的src目录
-
-python main.py -h		#查看帮助信息
-usage: main.py [-h] --repo REPO --directory DIRECTORY
+gitdown -h
+usage: gitdown [-h] --repo REPO --directory DIRECTORY --dst_root DST_ROOT
                [--thread_num THREAD_NUM]
 
 Download github resposity directory.
@@ -34,14 +30,18 @@ optional arguments:
   --directory DIRECTORY
                         Something like pcaps/. Note that do not start with "/"
                         and end with "/", use "" (empty) for root directory.
+  --dst_root DST_ROOT   Indicate where do you want to store the downloaded
+                        files and sub-dirs from github.
   --thread_num THREAD_NUM
                         The thread number for download!
 
+
 ```
-一共有三个参数。
+一共有四个参数。
 - repo: 这个是给出仓库的url路径， **注意：仓库名的格式类似于https://github.com/jmhIcoding/social_webpage，里面有用户名和仓库名。**
 - directory：给出要从这个仓库里面待下载的文件夹，**注意：目录名不能以“/” 开始和结束。** 项目**支持递归下载**给定文件夹下的所有内容。
-- thread_num: 多线程下载的线程数，默认为 5， 
+- dst_root: 给出要将下载好的内容放置在何处
+- thread_num: 多线程下载的线程数，默认为 5
 
 首次运行需要提供自己的github access token， 因为项目运行需要能够访问你自己的github项目，因此需要此token，获取方式见：https://blog.csdn.net/jmh1996/article/details/109327334
 
@@ -77,10 +77,11 @@ ValueError: The token you input is invalid!!!
 ```
 
 ## 运行示例
+
 命令：
 
 ```bash
-python main.py --repo=https://github.com/jmhIcoding/social_webpage --directory=pcaps/weibo
+gitdown --repo=https://github.com/jmhIcoding/social_webpage --directory=pcaps/weibo
 ```
 
 
@@ -104,4 +105,5 @@ Download pcaps/weibo/shuqi/2021101/1633039566.pcap now!
 
 ```
 下载的结果：
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2e139e859d694001b7cc4eb67b970b69.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBASWNvZGluZ19GMjAxNA==,size_19,color_FFFFFF,t_70,g_se,x_16)
