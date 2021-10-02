@@ -16,7 +16,7 @@ def down(repo, file):
     global  sem, lock, files, dst_root
 
     download.download_file(repo= repo, path= file, dst= dst_root + '/' + file)
-    if os.path.exists(file) == False:
+    if os.path.exists(dst_root + '/' + file) == False:
         print('{0} download fail! it will be re-download in the future!'.format(file))
         lock.acquire()
         files.append(file)
@@ -53,7 +53,7 @@ def main():
         pbar.update(1)
         file = files[index]
         index += 1
-        if os.path.exists(file) == True:
+        if os.path.exists(dst_root + '/' + file) == True:
            print('{0} already download!'.format(file))
            continue
 
