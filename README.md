@@ -1,10 +1,11 @@
 # 简介
 如果Github的项目太大，直接git clone可能下载到半路就中断了，导致反反复复下载不了。
 这个时候应该咋办呢？
-本人写了一个支持Github特定文件夹内容下载的项目：GitDown.
-github地址为：https://github.com/jmhIcoding/GitDown
+本人写了一个支持Github特定文件夹内容下载的项目：GitDown，github地址为：https://github.com/jmhIcoding/GitDown
 
-目前已经公开的类似项目，经常会出现下载文件丢失的问题，我这个项目会自动检测丢失，对于未成功下载的文件会反复尝试下载。
+目前已经公开的类似开源项目，经常会出现下载文件丢失的问题，或者代码年久失效。
+我这个项目会自动记录下载失败的文件，对于未成功下载的文件会反复尝试下载。
+2021年10月1日运行是完全正常的。
 
 # 使用方法
 ## 安装
@@ -18,9 +19,9 @@ git clone https://github.com/jmhIcoding/GitDown.git
 ## 使用
 
 ```bash
-cd src
+cd src					#切换到代码的src目录
 
-python main.py -h
+python main.py -h		#查看帮助信息
 usage: main.py [-h] --repo REPO --directory DIRECTORY
                [--thread_num THREAD_NUM]
 
@@ -37,18 +38,17 @@ optional arguments:
                         The thread number for download!
 
 ```
+一共有三个参数。
+- repo: 这个是给出仓库的url路径， **注意：仓库名的格式类似于https://github.com/jmhIcoding/social_webpage，里面有用户名和仓库名。**
+- directory：给出要从这个仓库里面待下载的文件夹，**注意：目录名不能以“/” 开始和结束。** 项目**支持递归下载**给定文件夹下的所有内容。
+- thread_num: 多线程下载的线程数，默认为 5， 
 
-输入 仓库的名称，以及要下载的目录名就可以了。
-注意仓库名的格式类似于：https://github.com/jmhIcoding/social_webpage，里面有用户名和仓库名。
-目录名不能以“/” 开始和结束。
-
-
-首次运行需要提供自己的github access token， 因为项目运行需要能够访问你自己的github项目，因此需要此token，获取方式见：https://blog.csdn.net/u014175572/article/details/55510825
+首次运行需要提供自己的github access token， 因为项目运行需要能够访问你自己的github项目，因此需要此token，获取方式见：https://blog.csdn.net/jmh1996/article/details/109327334
 
 ```python
 Please input your github access token now, first time:1234
 ```
-如果输入的token，无效会报错：
+如果输入的token无效会报错， 因此请按照教程自己申请github token。
 
 ```python
 Please input your github access token now, first time:1234
@@ -76,8 +76,15 @@ ValueError: The token you input is invalid!!!
 
 ```
 
-运行示例：
+## 运行示例
+命令：
 
+```bash
+python main.py --repo=https://github.com/jmhIcoding/social_webpage --directory=pcaps/weibo
+```
+
+
+运行过程：
 ```bash
 Download pcaps/weibo/shuqi/2021101/1633039566.pcap now!
  85%|▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ | 3133/3685 [26:02<09:38,  1.05s/it]Download pcaps/weibo/shuqi/2021101/1633039591.pcap now!
