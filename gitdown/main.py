@@ -15,7 +15,12 @@ dst_root = os.path.expanduser('~')
 def down(repo, file):
     global  sem, lock, files, dst_root
 
-    download.download_file(repo= repo, path= file, dst= dst_root + '/' + file)
+    try:
+        download.download_file(repo= repo, path= file, dst= dst_root + '/' + file)
+    except BaseException as exp:
+        print(exp)
+
+
     if os.path.exists(dst_root + '/' + file) == False:
         print('{0} download fail! it will be re-download in the future!'.format(file))
         lock.acquire()
